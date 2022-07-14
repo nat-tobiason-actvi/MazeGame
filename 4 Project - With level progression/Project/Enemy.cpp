@@ -10,8 +10,19 @@ Enemy::Enemy(int x, int y, int deltaX, int deltaY)
 	, m_movementInX(deltaX)
 	, m_movementInY(deltaY)
 {
-	m_directionX = (m_movementInX != 0) ? 1 : 0;
-	m_directionY = (m_movementInY != 0) ? 1 : 0;
+	InitDirection();
+}
+
+void Enemy::InitDirection()
+{
+	if (m_movementInX != 0)
+	{
+		m_directionX = 1;
+	}
+	if (m_movementInY != 0)
+	{
+		m_directionY = 1;
+	}
 }
 
 void Enemy::Draw()
