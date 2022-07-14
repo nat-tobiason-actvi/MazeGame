@@ -9,6 +9,9 @@ public:
 	virtual void Draw() override;
 	virtual void Update() override;
 
+protected:
+	void InitDirection();
+
 private:
 	int m_movementInX;
 	int m_movementInY;

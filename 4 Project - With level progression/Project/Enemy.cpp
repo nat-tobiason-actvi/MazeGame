@@ -10,6 +10,11 @@ Enemy::Enemy(int x, int y, int deltaX, int deltaY)
 	, m_movementInX(deltaX)
 	, m_movementInY(deltaY)
 {
+	InitDirection();
+}
+
+void Enemy::InitDirection()
+{
 	if (m_movementInX != 0)
 	{
 		m_directionX = 1;
