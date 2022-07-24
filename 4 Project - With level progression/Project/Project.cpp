@@ -1,4 +1,3 @@
-#include "vld.h"
 #include <iostream>
 #include "Game.h"
 #include "AudioManager.h"
