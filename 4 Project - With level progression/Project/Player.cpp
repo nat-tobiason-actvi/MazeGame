@@ -53,5 +53,10 @@ void Player::DropKey()
 
 void Player::Draw()
 {
-	cout << "@";
+	cout << direction;
+}
+
+void Player::UpdateDirection(char d)
+{
+	direction = d;
 }

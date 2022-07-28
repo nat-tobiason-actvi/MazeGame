@@ -75,25 +75,29 @@ bool GameplayState::Update(bool processInput)
 			arrowInput = _getch();
 		}
 
-		if ((input == kArrowInput && arrowInput == kLeftArrow) ||
+				if ((input == kArrowInput && arrowInput == kLeftArrow) ||
 			(char)input == 'A' || (char)input == 'a')
 		{
 			newPlayerX--;
+			m_player.UpdateDirection('<');
 		}
 		else if ((input == kArrowInput && arrowInput == kRightArrow) ||
 			(char)input == 'D' || (char)input == 'd')
 		{
 			newPlayerX++;
+			m_player.UpdateDirection('>');
 		}
 		else if ((input == kArrowInput && arrowInput == kUpArrow) ||
 			(char)input == 'W' || (char)input == 'w')
 		{
 			newPlayerY--;
+			m_player.UpdateDirection('^');
 		}
 		else if ((input == kArrowInput && arrowInput == kDownArrow) ||
 			(char)input == 'S' || (char)input == 's')
 		{
 			newPlayerY++;
+			m_player.UpdateDirection('v');
 		}
 		else if (input == kEscapeKey)
 		{

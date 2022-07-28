@@ -23,8 +23,11 @@ public:
 
 	virtual ActorType GetType() override { return ActorType::Player; }
 	virtual void Draw() override;
+
+	void UpdateDirection(char d);
 private:
 	Key* m_pCurrentKey;
 	int m_money;
 	int m_lives;
+	char direction;
 };
