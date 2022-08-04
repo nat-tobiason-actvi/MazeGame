@@ -60,64 +60,60 @@ void GameplayState::Enter()
 	Load();
 }
 
+void GameplayState::HandleInput()
+{
+	int arrowInput = 0;
+	int newPlayerX = m_player.GetXPosition();
+	int newPlayerY = m_player.GetYPosition();
+
+	// One of the arrow keys were pressed
+//	if (input == kArrowInput)
+//	{
+//		arrowInput = _getch();
+//	}
+
+	if ((GetAsyncKeyState(VK_LEFT) || GetAsyncKeyState('A') || GetAsyncKeyState('a')))
+	{
+		newPlayerX--;
+		m_player.UpdateDirection('<');
+	}
+	else if ((GetAsyncKeyState(VK_RIGHT) || GetAsyncKeyState('D') || GetAsyncKeyState('d')))
+	{
+		newPlayerX++;
+		m_player.UpdateDirection('>');
+	}
+	else if ((GetAsyncKeyState(VK_UP) || GetAsyncKeyState('W') || GetAsyncKeyState('w')))
+	{
+		newPlayerY--;
+		m_player.UpdateDirection('^');
+	}
+	else if ((GetAsyncKeyState(VK_DOWN) || GetAsyncKeyState('S') || GetAsyncKeyState('s')))
+	{
+		newPlayerY++;
+		m_player.UpdateDirection('v');
+	}
+	else if (GetKeyState(VK_ESCAPE))
+	{
+		m_pOwner->LoadScene(StateMachineExampleGame::SceneName::MainMenu);
+	}
+	else if ((GetKeyState('Z') || GetKeyState('z')))
+	{
+		m_player.DropKey();
+	}
+
+	// If position never changed
+	if (newPlayerX == m_player.GetXPosition() && newPlayerY == m_player.GetYPosition())
+	{
+		//return false;
+	}
+	else
+	{
+		HandleCollision(newPlayerX, newPlayerY);
+	}
+}
 bool GameplayState::Update(bool processInput)
 {
-	if (processInput && !m_beatLevel)
-	{
-		int input = _getch();
-		int arrowInput = 0;
-		int newPlayerX = m_player.GetXPosition();
-		int newPlayerY = m_player.GetYPosition();
-
-		// One of the arrow keys were pressed
-		if (input == kArrowInput)
-		{
-			arrowInput = _getch();
-		}
-
-				if ((input == kArrowInput && arrowInput == kLeftArrow) ||
-			(char)input == 'A' || (char)input == 'a')
-		{
-			newPlayerX--;
-			m_player.UpdateDirection('<');
-		}
-		else if ((input == kArrowInput && arrowInput == kRightArrow) ||
-			(char)input == 'D' || (char)input == 'd')
-		{
-			newPlayerX++;
-			m_player.UpdateDirection('>');
-		}
-		else if ((input == kArrowInput && arrowInput == kUpArrow) ||
-			(char)input == 'W' || (char)input == 'w')
-		{
-			newPlayerY--;
-			m_player.UpdateDirection('^');
-		}
-		else if ((input == kArrowInput && arrowInput == kDownArrow) ||
-			(char)input == 'S' || (char)input == 's')
-		{
-			newPlayerY++;
-			m_player.UpdateDirection('v');
-		}
-		else if (input == kEscapeKey)
-		{
-			m_pOwner->LoadScene(StateMachineExampleGame::SceneName::MainMenu);
-		}
-		else if ((char)input == 'Z' || (char)input == 'z')
-		{
-			m_player.DropKey();
-		}
-
-		// If position never changed
-		if (newPlayerX == m_player.GetXPosition() && newPlayerY == m_player.GetYPosition())
-		{
-			//return false;
-		}
-		else
-		{
-			HandleCollision(newPlayerX, newPlayerY);
-		}
-	}
+	if (processInput && !m_beatLevel) HandleInput();
 	if (m_beatLevel)
 	{
 		++m_skipFrameCount;
